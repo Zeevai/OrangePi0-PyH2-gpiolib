@@ -62,10 +62,17 @@ PyMODINIT_FUNC
 #else
         return;
 #endif
-
-    int i;
+/* THIS
+ * IS
+ * BAD
+ * I have no idea what I'm doing here. The original code complained about comparing
+ * an unsigned and a signed integer. I'm not saying my version is good or even call
+ * it a "fix". I'm just saying that it ran after I made these changes:
+ * removing "int i;" and adding "size_t" in the first for-loop
+ * Use at your own peril!
+ */
     int j;
-    for(i = 0; i < sizeof(gpio)/sizeof(gpio[0]); i++){
+    for(size_t i = 0; i < sizeof(gpio)/sizeof(gpio[0]); i++){
         for(j = 0; j < 40; j++){
             if(!strcmp(gpio[i].pins[j].name, "")){
                 break;
